@@ -1,0 +1,24 @@
+* Debug Motoko quicksort function by moc
+#+begin_src bash :results verbatim
+moc --package base $(dfx cache show)/base -r MocQuicksort.mo
+#+end_src
+* Capsulate the quicksort function into a canister
+** Start the local canister execution environment
+#+begin_src bash :results verbatim
+dfx start
+#+end_src
+** Register, build, and deploy the application
+#+begin_src bash :results verbatim
+dfx deploy
+#+end_src
+** Open the Candid UI for debugging
+#+begin_src bash :results verbatim
+CANISTER_UI_ID=$(dfx canister id __Candid_UI)
+CANISTER_ID=$(dfx canister id ic_project_2)
+open http://"${CANISTER_UI_ID}".localhost:8000/?id="${CANISTER_ID}"
+#+end_src
+** Deploy to Mainnet
+#+begin_src bash :results verbatim
+CYCLE_AMOUT=1000000000000
+dfx deploy --network=ic --with-cycles="${CYCLE_AMOUT}"
+#+end_src
